@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../resources/app_strings.dart';
 import '../../../widgets/custom_form_text_field.dart';
+import '../../../widgets/text_form_validators.dart';
+import '../signup/signup.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -86,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       FocusScope.of(context).requestFocus(_passwordFocusNode),
                   textInputAction: TextInputAction.next,
                   focusNode: _emailFocusNode,
-                  labelText: AppStrings.yourEmail,
+                  labelText: 'Your Email',
                   keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   validator: emailValidator,
@@ -100,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onEditingComplete: _formValidate,
                   textInputAction: TextInputAction.done,
                   focusNode: _passwordFocusNode,
-                  labelText: AppStrings.password,
+                  labelText: 'Password',
                   keyboardType: TextInputType.visiblePassword,
                   controller: _passwordController,
                   validator: passwordValidator,
@@ -132,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     child: Text(
-                      AppStrings.login.toUpperCase(),
+                      "Login".toUpperCase(),
                     ),
                   ),
                 ),
@@ -150,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.pushNamed(context, RegisterPage.id);
+                        Navigator.pushNamed(context, SignUpScreen.id);
                       },
                       child: const Text(
                         '  Register Now',
@@ -200,23 +202,4 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-String? emailValidator(value) {
-  if (value!.isEmpty) {
-    return AppStrings.emailAddressCanNotBeEmpty;
-  } else if (!RegExp(AppStrings.emailAddressRegularExpression)
-      .hasMatch(value)) {
-    return AppStrings.enterCorrectEmailAddress;
-  } else {
-    return null;
-  }
-}
 
-String? passwordValidator(value) {
-  if (value!.isEmpty) {
-    return AppStrings.passwordCanNotBeEmpty;
-  } else if (value.length < 8) {
-    return AppStrings.passwordCanNotBeLessThan_8Characters;
-  } else {
-    return null;
-  }
-}
